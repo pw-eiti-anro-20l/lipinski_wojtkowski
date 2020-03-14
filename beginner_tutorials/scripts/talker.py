@@ -10,10 +10,10 @@ from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
 moveBindings = {
-        rospy.get_param("forward"):(1,0,0,0),
-        's':(-1,0,0,0),
-        'a':(0,0,0,1),
-        'd':(0,0,0,-1) }
+        rospy.get_param("/controller/forward"):(1,0,0,0),
+        rospy.get_param("/controller/back"):(-1,0,0,0),
+        rospy.get_param("/controller/left"):(0,0,0,1),
+        rospy.get_param("/controller/right"):(0,0,0,-1) }
 
 def getKey():
     tty.setraw(sys.stdin.fileno())
