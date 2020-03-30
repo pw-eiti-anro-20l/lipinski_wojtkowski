@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lab_robot">
+	<xacro:property name="yaml_file" value="$(find LAB_2)/config/config.yaml" />
+	<xacro:property name="params" value="${load_yaml(yaml_file)}" />
+	
+	<link name="base">
+		<visual>
+			<geometry>
+				<cylinder length="0.6" radius="0.2" />
+			</geometry>
+		</visual>
+	</link>
+	<link name="link1">
+		<visual>
+			<geometry>
+				<cylinder length="0.6" radius="0.2" />
+			</geometry>
+		</visual>
+	</link>
+	<link name="link2">
+		<visual>
+			<geometry>
+				<cylinder length="0.6" radius="0.2" />
+			</geometry>
+		</visual>
+	</link>
+	<link name="manip">
+		<visual>
+			<geometry>
+				<cylinder length="0.3" radius="0.1" />
+			</geometry>
+		</visual>
+	</link>
+	
+	<joint name="joint1" type="continuous">
+		<parent link="base" />
+		<child link="link1" />
+		<origin xyz="${params['joint1']['pos']}" rpy="${params['joint1']['rpy']}" />
+		<axis xyz="0 0 1" />
+	</joint>
+	
+	<joint name="joint2" type="continuous">
+		<parent link="link1" />
+		<child link="link2" />
+		<origin xyz="${params['joint2']['pos']}" rpy="${params['joint2']['rpy']}" />
+		<axis xyz="0 0 1" />
+	</joint>
+	
+	<joint name="joint3" type="continuous">
+		<parent link="link2" />
+		<child link="manip" />
+		<origin xyz="${params['joint3']['pos']}" rpy="${params['joint3']['rpy']}" />
+		<axis xyz="0 0 1" />
+	</joint>
+</robot>
