@@ -3,12 +3,29 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <string>
+#include <map>
+#include <utility>
+#include <stdexcept>
+
+std::pair<std::string, double> getArg(std::string str);
+bool check_arg_map(const std::map<std::string, double> & map);
 
 int main( int argc, char** argv) {
-	double a1 = 1, a2 = 1, d3 = 0, alpha1 = M_PI, theta1 = 0, theta2 = 0;
-	double dh_params[3][4] = {{0, 0, 0, theta1}, {a1, 0, 0, theta1}, {a2, alpha1, d3, 0}};
+	std::map<std::string, double> arg_map;
+	for(int i = 1; i < argc - 2; ++i) {
+		arg_map.insert(getArg(argv[i]));
+	}
+	if(!check_arg_map(arg_map)) {
+		std::cerr << "Incorrect or missing arguments!\n";
+		return -1;
+	}
+	double dh_params[3][4] = {{0, 0, 0, arg_map["theta1"]},
+	                           {arg_map["a1"], 0, 0, arg_map["theta2"]},
+							   {arg_map["a2"], arg_map["alpha1"], arg_map["d3"], 0}};
+	
 	std::ofstream  config;
-	config.open("./src/lipinski-wojtkowski/LAB_2/config/config.yaml");
+	config.open("../../../src/lipinski-wojtkowski/LAB_2/config/config.yaml", std::ofstream::out | std::ofstream::trunc);
 	if(!config.is_open()) {
 		std::cerr <<  "Couldn't open config.yaml file\n";
 		return -1;
@@ -19,9 +36,28 @@ int main( int argc, char** argv) {
 		double roll, pitch, yaw;
 		frame.M.GetRPY(roll, pitch, yaw);
 		config << "joint" << i+1 << ": {\n";
-		config << "\trpy: \"" << roll << " " << pitch << " " << yaw << "\",\n";
-		config << "\tpos: \"" << frame.p.x() << " " << frame.p.y() << " " << frame.p.z() << "\",\n}\n";
+		config << " rpy: \"" << roll << " " << pitch << " " << yaw << "\"," << "\n";
+		config << " pos: \"" << frame.p.x() << " " << frame.p.y() << " " << frame.p.z() << "\",\n}\n";
 	}
 	config << "...";
 	config.close();
+	return 0;
+}
+
+std::pair<std::string, double> getArg(std::string str) {
+	size_t split_point = str.find_first_of('=');
+	if(str[0] != '-' || split_point == std::string::npos)
+		throw std::invalid_argument(str);
+	double value = stod(str.substr(split_point + 1));
+	std::string name = str.substr(1, split_point - 1);
+	return std::make_pair(name, value);
+}
+
+bool check_arg_map(const std::map<std::string, double> & arg_map) {
+	std::string keys[] = {"a1", "a2", "d3", "alpha1", "theta1", "theta2"};
+	for(int i = 0; i < 6; ++i) {
+		if(arg_map.find(keys[i]) == arg_map.end())
+			return false;
+	}
+	return true;
 }
