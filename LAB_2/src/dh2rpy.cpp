@@ -31,13 +31,14 @@ int main( int argc, char** argv) {
 		return -1;
 	}
 	config <<"---\n";
+	config << "a1: " << arg_map["a1"] << "\n";
+	config << "a2: " << arg_map["a2"] << "\n";
+	config << "d3: " << arg_map["d3"] << "\n";
 	for(int i = 0; i < 3; ++i) {
 		KDL::Frame frame = KDL::Frame::DH(dh_params[i][0], dh_params[i][1], dh_params[i][2], dh_params[i][3]);
 		double roll, pitch, yaw;
 		frame.M.GetRPY(roll, pitch, yaw);
-		config << "joint" << i+1 << ": {\n";
-		config << " rpy: \"" << roll << " " << pitch << " " << yaw << "\"," << "\n";
-		config << " pos: \"" << frame.p.x() << " " << frame.p.y() << " " << frame.p.z() << "\",\n}\n";
+		config << "joint" << i+1 << "-rpy: \"" << roll << " " << pitch << " " << yaw << "\"\n";
 	}
 	config << "...";
 	config.close();

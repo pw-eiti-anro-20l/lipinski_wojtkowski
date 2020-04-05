@@ -13,16 +13,17 @@
 	<link name="link1">
 		<visual>
 			<geometry>
-				<cylinder length="0.6" radius="0.2" />
+				<cylinder length="${params['a1']}" radius="0.2" />
 			</geometry>
-			<origin xyz="0 0 -0.3" rpy="0 0 0" />
+			<origin xyz="${.5*params['a1']} 0 0" rpy="0 1.57 0" />
 		</visual>
 	</link>
 	<link name="link2">
 		<visual>
 			<geometry>
-				<cylinder length="0.6" radius="0.2" />
+				<cylinder length="${params['a2']}" radius="0.2" />
 			</geometry>
+			<origin xyz="${.5*params['a1']} 0 0" rpy="0 1.57 0" />
 		</visual>
 	</link>
 	<link name="manip">
@@ -36,21 +37,22 @@
 	<joint name="joint1" type="continuous">
 		<parent link="base" />
 		<child link="link1" />
-		<origin xyz="${params['joint1']['pos']}" rpy="${params['joint1']['rpy']}" />
+		<origin xyz="0 0 0" rpy="${params['joint1-rpy']}" />
 		<axis xyz="0 0 1" />
 	</joint>
 	
 	<joint name="joint2" type="continuous">
 		<parent link="link1" />
 		<child link="link2" />
-		<origin xyz="${params['joint2']['pos']}" rpy="${params['joint2']['rpy']}" />
+		<origin xyz="${params['a1']} 0 0" rpy="${params['joint2-rpy']}" />
 		<axis xyz="0 0 1" />
 	</joint>
 	
-	<joint name="joint3" type="continuous">
+	<joint name="joint3" type="prismatic">
 		<parent link="link2" />
 		<child link="manip" />
-		<origin xyz="${params['joint3']['pos']}" rpy="${params['joint3']['rpy']}" />
+		<origin xyz="${params['a2']} 0 0" rpy="${params['joint3-rpy']}" />
 		<axis xyz="0 0 1" />
+		<limit effort="5" velocity="5" lower="${-params['d3']}" upper="${params['d3']}" />
 	</joint>
 </robot>
