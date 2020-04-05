@@ -13,15 +13,17 @@
 	<link name="link1">
 		<visual>
 			<geometry>
-				<cylinder length="0.6" radius="0.2" />
+				<cylinder length="${params['a1']}" radius="0.2" />
 			</geometry>
+			<origin xyz="${.5*params['a1']} 0 0" rpy="0 1.57 0" />
 		</visual>
 	</link>
 	<link name="link2">
 		<visual>
 			<geometry>
-				<cylinder length="0.6" radius="0.2" />
+				<cylinder length="${params['a2']}" radius="0.2" />
 			</geometry>
+			<origin xyz="${.5*params['a2']} 0 0" rpy="0 1.57 0" />
 		</visual>
 	</link>
 	<link name="manip">
@@ -35,18 +37,18 @@
 	<joint name="joint1" type="fixed">
 		<parent link="base" />
 		<child link="link1" />
-		<origin xyz="${params['joint1']['pos']}" rpy="${params['joint1']['rpy']}" />
+		<origin xyz="0 0 0" rpy="${params['joint1-rpy']}" />
 	</joint>
 	
 	<joint name="joint2" type="fixed">
 		<parent link="link1" />
 		<child link="link2" />
-		<origin xyz="${params['joint2']['pos']}" rpy="${params['joint2']['rpy']}" />
+		<origin xyz="${params['a1']} 0 0" rpy="${params['joint2-rpy']}" />
 	</joint>
 	
 	<joint name="joint3" type="fixed">
 		<parent link="link2" />
 		<child link="manip" />
-		<origin xyz="${params['joint3']['pos']}" rpy="${params['joint3']['rpy']}" />
+		<origin xyz="${params['a2']} 0 ${params['d3']}" rpy="${params['joint3-rpy']}" />
 	</joint>
 </robot>

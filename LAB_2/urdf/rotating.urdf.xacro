@@ -23,7 +23,7 @@
 			<geometry>
 				<cylinder length="${params['a2']}" radius="0.2" />
 			</geometry>
-			<origin xyz="${.5*params['a1']} 0 0" rpy="0 1.57 0" />
+			<origin xyz="${.5*params['a2']} 0 0" rpy="0 1.57 0" />
 		</visual>
 	</link>
 	<link name="manip">
