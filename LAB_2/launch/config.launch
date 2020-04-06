@@ -3,7 +3,7 @@
 	<arg name="a2" default="1" />
 	<arg name="theta1" default="0" />
 	<arg name="theta2" default="0" />
-	<arg name="d3" default="0" />
-	<arg name="alpha1" default="3.1415" />
-	<node name="dh2rpy" pkg="LAB_2" type="dh2rpy" args="-a1=$(arg a1) -a2=$(arg a2) -theta1=$(arg theta1) -theta2=$(arg theta2) -alpha1=$(arg alpha1) -d3=$(arg d3)" cwd="node" />
+	<arg name="d3" default="0.5" />
+	<arg name="alpha2" default="3.1415" />
+	<node name="dh2rpy" pkg="LAB_2" type="dh2rpy" args="-a1=$(arg a1) -a2=$(arg a2) -theta1=$(arg theta1) -theta2=$(arg theta2) -alpha2=$(arg alpha2) -d3=$(arg d3)" cwd="node" />
 </launch>
