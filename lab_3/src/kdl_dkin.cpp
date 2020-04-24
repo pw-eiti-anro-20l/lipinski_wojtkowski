@@ -9,6 +9,6 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	ros::init(argc, argv, "KDL_DKIN");
-	SubscribePublish SPObject;
+	SubscribePublish SPObject = SubscribePublish();
 	ros::spin();
 }

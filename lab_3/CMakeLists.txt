@@ -121,7 +121,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+ include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -210,5 +210,7 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(kdl_dkin src/kdl_dkin.cpp)
+add_executable(kdl_dkin 
+ src/kdl_dkin.cpp
+ src/SubscribePublish.cpp)
 target_link_libraries(kdl_dkin ${catkin_LIBRARIES})
