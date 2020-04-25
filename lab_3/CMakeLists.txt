@@ -212,5 +212,6 @@ include_directories(
 
 add_executable(kdl_dkin 
  src/kdl_dkin.cpp
- src/SubscribePublish.cpp)
+ src/SubscribePublish.cpp
+ src/nonkdl.py)
 target_link_libraries(kdl_dkin ${catkin_LIBRARIES})

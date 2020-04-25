@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lab_robot">
-	<xacro:property name="yaml_file" value="$(find LAB_2)/config/config.yaml" />
+	<xacro:property name="yaml_file" value="$(find lab_3)/config/config.yaml" />
 	<xacro:property name="params" value="${load_yaml(yaml_file)}" />
 	
 	<link name="base">
