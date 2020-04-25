@@ -27,7 +27,7 @@ private:
 		double theta2;
 		
 		Robot() {}
-		Robot(double params[]) : a1(params[0]), a2(params[1]), alpha2(params[2]), d3(params[3]), theta1(params[4]), theta2(params[5]) {ROS_INFO("%f %f %f %f %f %f", a1, a2, alpha2, d3, theta1, theta2);}
+		Robot(double params[]) : a1(params[0]), a2(params[1]), alpha2(params[2]), d3(params[3]), theta1(params[4]), theta2(params[5]) {}
 		KDL::Frame transform_joint1(double dtheta1);
 		KDL::Frame transform_joint2(double dtheta2);
 		KDL::Frame transform_joint3(double dd3);

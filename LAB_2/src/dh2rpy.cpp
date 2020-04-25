@@ -34,6 +34,9 @@ int main( int argc, char** argv) {
 	config << "a1: " << arg_map["a1"] << "\n";
 	config << "a2: " << arg_map["a2"] << "\n";
 	config << "d3: " << arg_map["d3"] << "\n";
+	config << "alpha2: " << arg_map["alpha2"] << "\n";
+	config << "theta1: " << arg_map["theta1"] << "\n";
+	config << "theta2: " << arg_map["theta2"] << "\n";
 	for(int i = 0; i < 3; ++i) {
 		KDL::Frame frame = KDL::Frame::DH_Craig1989(dh_params[i][0], dh_params[i][1], dh_params[i][2], dh_params[i][3]);
 		double roll, pitch, yaw;

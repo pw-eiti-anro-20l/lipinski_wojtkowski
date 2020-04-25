@@ -13,10 +13,7 @@ SubscribePublish::SubscribePublish() {
 	_n.getParam("/kdl_dkin/d3", params[3]);
 	_n.getParam("/kdl_dkin/theta1", params[4]);
 	_n.getParam("/kdl_dkin/theta2", params[5]);
-	for(int i = 0; i < 6; ++i)
-		ROS_INFO("%f", params[i]);
 	_robot = Robot(params);
-	ROS_INFO("Init");
 }
 
 void SubscribePublish::callback(const sensor_msgs::JointState::ConstPtr& msg) {
