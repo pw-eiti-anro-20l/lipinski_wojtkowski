@@ -2,7 +2,7 @@
 import rospy
 from sensor_msgs.msg import JointState
 import numpy as np
-import quaternion
+from tf import transformations
 import dhjoint
 from math import pi
 from math import cos
@@ -10,9 +10,6 @@ from math import sin
 from geometry_msgs.msg import PoseStamped
 
 rospy.init_node('nonkdl', anonymous=True)
-#joint1 = rospy.get_param('joint1')
-#joint3 = rospy.get_param('joint3')
-#joint2 = rospy.get_param('joint2')
 a1 = rospy.get_param('~a1')
 a2 = rospy.get_param('~a2')
 d3 = rospy.get_param('~d3')
@@ -28,6 +25,7 @@ def count(data):
 	pos_change = data.position
 	i=0
 	prev=[]
+	T = None
 	for joint in joints:
 		if joint.rot:
 			joint.theta =joint.prev + pos_change[i]
@@ -35,32 +33,25 @@ def count(data):
 			joint.d = joint.prev + pos_change[i]	
 		i+=1
 		A = np.array([[cos(joint.theta), -sin(joint.theta), 0., joint.a], 
-		[sin(joint.theta)*cos(joint.alfa), cos(joint.theta)*sin(joint.alfa), -sin(joint.alfa), -joint.d*sin(joint.alfa)], 
+		[sin(joint.theta)*cos(joint.alfa), cos(joint.theta)*cos(joint.alfa), -sin(joint.alfa), -joint.d*sin(joint.alfa)], 
 		[sin(joint.theta)*sin(joint.alfa), cos(joint.theta)*sin(joint.alfa), cos(joint.alfa), joint.d*cos(joint.alfa)], 
 		[0., 0., 0., 1.]])
-		#A=np.array([[cos(joint.theta), -sin(joint.theta)*cos(joint.alfa), sin(joint.theta)*sin(joint.alfa), joint.a*cos(joint.theta)], 
-		#[sin(joint.theta), cos(joint.theta)*cos(joint.alfa), -cos(joint.theta)*sin(joint.alfa), -joint.a*sin(joint.theta)], 
-		#[0, sin(joint.alfa), cos(joint.alfa), joint.d], 
-		#[0., 0., 0., 1.]])
-		try:
-			T
-		except NameError:
+		if T is None:
 			T=np.array(A)
 		else:
-			T=np.dot(T,A)
-		qua = quaternion.from_rotation_matrix(T[:3,:3],False) #konwersja macierzy 3x3 z gory T na kwaternion,
-		delta=T[:3,:3]-quaternion.as_rotation_matrix(qua)
-		print(delta)
+			T=np.array(np.dot(T,A))
+		qua = transformations.quaternion_from_matrix(T) #konwersja macierzy T na kwaternion,
+		delta=transformations.quaternion_matrix(qua)
 		p = PoseStamped()
 		p.header.frame_id = 'base'
 		p.header.stamp = data.header.stamp
 		p.pose.position.x = T[0,3]
 		p.pose.position.y = T[1,3]
 		p.pose.position.z = T[2,3]
-		p.pose.orientation.x = qua.x
-		p.pose.orientation.y = qua.y
-		p.pose.orientation.z = qua.z
-		p.pose.orientation.w = qua.w
+		p.pose.orientation.x = qua[0]
+		p.pose.orientation.y = qua[1]
+		p.pose.orientation.z = qua[2]
+		p.pose.orientation.w = qua[3]
 		k=('PoseStamped%d' %i)
 		rospy.Publisher(k, PoseStamped, queue_size = 10).publish(p)
 

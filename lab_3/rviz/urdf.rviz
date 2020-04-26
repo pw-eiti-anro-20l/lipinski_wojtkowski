@@ -12,6 +12,8 @@ Panels:
         - /Pose2
         - /Pose3
         - /Pose4
+        - /Pose5
+        - /Pose6
       Splitter Ratio: 0.5
     Tree Height: 579
   - Class: rviz/Selection
@@ -177,7 +179,37 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /PoseStamped
+      Topic: /PoseStamped3
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /PoseStamped2
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /PoseStamped1
       Unreliable: false
       Value: true
   Enabled: true
@@ -245,4 +277,4 @@ Window Geometry:
     collapsed: false
   Width: 1216
   X: 487
-  Y: 56
+  Y: 27
