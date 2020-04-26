@@ -5,5 +5,5 @@
 	<arg name="theta2" default="0" />
 	<arg name="d3" default="0.5" />
 	<arg name="alpha2" default="3.1415" />
-	<node name="dh2rpy" pkg="LAB_2" type="dh2rpy" args="-a1=$(arg a1) -a2=$(arg a2) -theta1=$(arg theta1) -theta2=$(arg theta2) -alpha2=$(arg alpha2) -d3=$(arg d3)" cwd="node" />
+	<node name="dh2rpy" pkg="LAB_2" type="dh2rpy" args="-a1=$(arg a1) -a2=$(arg a2) -theta1=$(arg theta1) -theta2=$(arg theta2) -alpha2=$(arg alpha2) -d3=$(arg d3) -dir=LAB_2" cwd="node" />
 </launch>
