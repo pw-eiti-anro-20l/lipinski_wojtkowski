@@ -1,0 +1,7 @@
+#request
+float32[] joint_states
+time[] mov_time
+string int_type
+---
+#response
+bool status
