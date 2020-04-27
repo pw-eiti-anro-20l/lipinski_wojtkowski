@@ -1,6 +1,6 @@
 #request
-float32[] joint_states
-time[] mov_time
+float64[] joint_states
+duration mov_duration
 string int_type
 ---
 #response
