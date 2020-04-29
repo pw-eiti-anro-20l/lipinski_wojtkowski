@@ -12,6 +12,12 @@ SubscribePublish::SubscribePublish() {
 	_n.getParam("/d3", _robot.d3);
 	_n.getParam("/theta1", _robot.theta1);
 	_n.getParam("/theta2", _robot.theta2);
+	_n.getParam("/joint1_lim", _robot.limit1);
+	_robot.limit1 *= M_PI;
+	_n.getParam("/joint2_lim", _robot.limit2);
+	_robot.limit2 *= M_PI;
+	_n.getParam("/joint3_lim", _robot.limit3);
+	_robot.limit3 *= _robot.d3;
 }
 
 void SubscribePublish::callback(const sensor_msgs::JointState::ConstPtr& msg) {
@@ -19,9 +25,18 @@ void SubscribePublish::callback(const sensor_msgs::JointState::ConstPtr& msg) {
 	KDL::Frame joint1_state = KDL::Frame::DH_Craig1989(0, 0, 0, _robot.theta1 + pos_vec[0]);
 	KDL::Frame joint2_state = joint1_state * KDL::Frame::DH_Craig1989(_robot.a1, 0, 0, _robot.theta2 + pos_vec[1]);
 	KDL::Frame joint3_state = joint2_state * KDL::Frame::DH_Craig1989(_robot.a2, _robot.alpha2, _robot.d3 + pos_vec[2], 0);
-	_publish(_pub1, joint1_state);
-	_publish(_pub2, joint2_state);
-	_publish(_pub3, joint3_state);
+	if(fabs(pos_vec[0]) > _robot.limit1)
+		ROS_INFO("[KDL] joint1 out of limits; value: %f", pos_vec[0]);
+	else
+		_publish(_pub1, joint1_state);
+	if(fabs(pos_vec[1]) > _robot.limit2)
+		ROS_INFO("[KDL] joint2 out of limits; value: %f", pos_vec[1]);
+	else
+		_publish(_pub2, joint2_state);
+	if(fabs(pos_vec[2]) > _robot.limit3)
+		ROS_INFO("[KDL] joint3 out of limits; value: %f", pos_vec[2]);
+	else
+		_publish(_pub3, joint3_state);
 }
 
 void SubscribePublish::_publish(const ros::Publisher& pub, const KDL::Frame& pos) {

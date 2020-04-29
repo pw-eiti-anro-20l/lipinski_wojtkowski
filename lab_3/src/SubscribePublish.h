@@ -24,6 +24,9 @@ private:
 		double d3;
 		double theta1;
 		double theta2;
+		double limit1;
+		double limit2;
+		double limit3;
 	} _robot;
 	
 	void _publish(const ros::Publisher& pub, const KDL::Frame& pos);
