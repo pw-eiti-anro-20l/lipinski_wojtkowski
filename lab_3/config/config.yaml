@@ -5,6 +5,9 @@ d3: 0.5
 alpha2: 3.1415
 theta1: 0
 theta2: 0
+joint1_lim: 0.5
+joint2_lim: 0.5
+joint3_lim: 0.5
 joint1: {
  rpy: "0 -0 0",
  pos: "0 -0 0",
