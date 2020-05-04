@@ -10,7 +10,7 @@ using namespace std;
 class JintProvider {
 public:
 	JintProvider();
-	bool callback(lab_4::jint_control_srv::Request& req, lab4::jint_control_srv::Response& resp);
+	bool callback(lab_4::jint_control_srv::Request& req, lab_4::jint_control_srv::Response& resp);
 private:
 	ros::NodeHandle _nh;
 	ros::ServiceServer _server;

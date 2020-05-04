@@ -5,3 +5,4 @@ string int_type
 ---
 #response
 bool status
+string msg

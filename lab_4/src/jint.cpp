@@ -1,7 +1,11 @@
 #include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
-#include <lab4/jint_control_srv.h>
+#include "JintProvider.h"
 
-void main(int argc, char** argv) {
-	
+using namespace std;
+
+int main(int argc, char** argv) {
+	ros::init(argc, argv, "JINT");
+	JintProvider provider;
+	ros::spin();
+	return 0;
 }
