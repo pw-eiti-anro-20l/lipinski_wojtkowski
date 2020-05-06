@@ -8,6 +8,10 @@ JintProvider::JintProvider() {
 	_server = _nh.advertiseService("jint_srv", &JintProvider::callback, this);
 	_pub = _nh.advertise<sensor_msgs::JointState>("/joint_states", 1);
 	_position = {0, 0, 0};
+	_limits = vector<double>(3);
+	_limits[0] = M_PI * _nh.param("/joint1_lim", 1.0);
+	_limits[1] = M_PI * _nh.param("/joint2_lim", 1.0);
+	_limits[2] = _nh.param("/d3", 0.5) * _nh.param("/joint3_lim", 1.0);
 	_publish(_position);
 	_publish(_position);
 	_publish(_position);
@@ -24,16 +28,22 @@ bool JintProvider::callback(lab_4::jint_control_srv::Request& req, lab_4::jint_c
 	else if(int_type == "cube")
 		iType = Interpolation::CUBE;
 	else {
-		resp.status = false;
-		resp.msg = "[ERROR]: Interpolation \"" + int_type + "\" not supported"; 
+		ROS_ERROR("[Jint Service]: Interpolation \"%s\" not supported", int_type.c_str());
 		return false;
 	}
 	
 	if(mov_duration.toSec() <= 0) {
-		resp.status = false;
-		resp.msg="[ERROR]: Time must be greater than 0.";
+		ROS_ERROR("[Jint Service]: Time must be greater than 0");
 		return false;
 	}
+	
+	for(int i = 0; i < 3; ++i)
+		if(_limits[i] < fabs(final_joint_states[i])) {
+			ROS_ERROR("[Jint Service]: Goal (%.2f) exceeds joint limint no. %d (%.2f)", final_joint_states[i], i + 1, _limits[i]);
+			return false;
+		}
+			
+			
 	
 	ros::Time start = ros::Time::now();
 	vector<vector<double>> interpol_params;
@@ -42,12 +52,12 @@ bool JintProvider::callback(lab_4::jint_control_srv::Request& req, lab_4::jint_c
 		switch(iType) {
 		case Interpolation::LIN: {
 			double v = (final_joint_states[i] - _position[i])/mov_duration.toSec();
-			params.push_back(_position[i] - v * start.toSec());
+			params.push_back(_position[i]);
 			params.push_back(v);
 		}
 			break;
 		case Interpolation::CUBE:
-			calc_cube_params(final_joint_states[i], _position[i], mov_duration.toSec(), start.toSec(), params);
+			calc_cube_params(final_joint_states[i], _position[i], mov_duration.toSec(), 0, params);
 			break;
 		}
 		interpol_params.push_back(params);
@@ -55,7 +65,7 @@ bool JintProvider::callback(lab_4::jint_control_srv::Request& req, lab_4::jint_c
 	
 	while(ros::Time::now() <= start + mov_duration) {
 		vector<double> new_pos;
-		double t = ros::Time::now().toSec();
+		double t = ros::Time::now().toSec() - start.toSec();
 		for(int i = 0; i < 3; ++i)
 			new_pos.push_back(interpolate(interpol_params[i], t));
 		_position = new_pos;
@@ -76,11 +86,12 @@ void JintProvider::_publish(const vector<double>& position) {
 }
 
 void JintProvider::calc_cube_params(double x1, double x0, double dt, double t0, vector<double>& vect) {
-	double t1 = t0 + dt;
-	double a0 = (x0*t1-t0*x1)/dt-t1*t0*(t1+t0)*(x1-x0)/pow(dt, 3);
-	double a1 = (x1-x0)/dt + (x1-x0)/pow(dt, 3)*(t1*t1+4*t1*t0+t0*t0);
-	double a2 = 3*(x1-x0)*(t1+t0)/pow(dt, 3);
-	double a3 = 2*(x1-x0)/pow(dt, 3);
+	double t1 = t0 + dt, dt3 = pow(dt, 3);
+	double dx = x1 - x0;
+	double a0 = (x0 * t1 - t0 * x1) / dt + t1 * t0 * (t1 + t0) * dx/dt3;
+	double a1 = dx / dt -  (t1 * t1 + 4 * t1 * t0 + t0 * t0) * dx/dt3;
+	double a2 = 3 * (t1 + t0) * dx/dt3;
+	double a3 = -2 * dx/dt3;
 	vect.push_back(a0);
 	vect.push_back(a1);
 	vect.push_back(a2);

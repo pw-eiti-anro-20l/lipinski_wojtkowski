@@ -16,6 +16,7 @@ private:
 	ros::ServiceServer _server;
 	ros::Publisher _pub;
 	vector<double> _position;
+	vector<double> _limits;
 	enum Interpolation {LIN, CUBE} iType;
 	
 	double interpolate(const vector<double>& params, double t);
