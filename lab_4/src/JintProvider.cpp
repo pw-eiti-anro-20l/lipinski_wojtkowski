@@ -13,8 +13,6 @@ JintProvider::JintProvider() {
 	_limits[1] = M_PI * _nh.param("/joint2_lim", 1.0);
 	_limits[2] = _nh.param("/d3", 0.5) * _nh.param("/joint3_lim", 1.0);
 	_publish(_position);
-	_publish(_position);
-	_publish(_position);
 	ROS_INFO("Provider_init");
 }
 
@@ -57,7 +55,7 @@ bool JintProvider::callback(lab_4::jint_control_srv::Request& req, lab_4::jint_c
 		}
 			break;
 		case Interpolation::CUBE:
-			calc_cube_params(final_joint_states[i], _position[i], mov_duration.toSec(), 0, params);
+			calc_cube_params(final_joint_states[i], _position[i], mov_duration.toSec(), params);
 			break;
 		}
 		interpol_params.push_back(params);
@@ -85,13 +83,12 @@ void JintProvider::_publish(const vector<double>& position) {
 	_pub.publish(msg);
 }
 
-void JintProvider::calc_cube_params(double x1, double x0, double dt, double t0, vector<double>& vect) {
-	double t1 = t0 + dt, dt3 = pow(dt, 3);
+void JintProvider::calc_cube_params(double x1, double x0, double dt, vector<double>& vect) {
 	double dx = x1 - x0;
-	double a0 = (x0 * t1 - t0 * x1) / dt + t1 * t0 * (t1 + t0) * dx/dt3;
-	double a1 = dx / dt -  (t1 * t1 + 4 * t1 * t0 + t0 * t0) * dx/dt3;
-	double a2 = 3 * (t1 + t0) * dx/dt3;
-	double a3 = -2 * dx/dt3;
+	double a0 = x0;
+	double a1 = 0;
+	double a2 = 3 * dx / (dt * dt);
+	double a3 = -2 * dx / (dt * dt * dt);
 	vect.push_back(a0);
 	vect.push_back(a1);
 	vect.push_back(a2);

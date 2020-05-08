@@ -12,12 +12,12 @@ int main(int argc, char** argv) {
 	lab_4::jint_control_srv service;
 	service.request.joint_states = {1.57, 1.57, -0.25};
 	service.request.mov_duration = ros::Duration(5, 0);
-	service.request.int_type = "cube";
+	service.request.int_type = "lin";
 	ROS_INFO("Request init");
 	if(client.call(service))
 		ROS_INFO("%s", service.response.msg.c_str());
 
-	service.request.joint_states = {-1.57, 0, 0.25};
+	service.request.joint_states = {-1.57, 0, 0};
 	service.request.mov_duration = ros::Duration(5, 0);
 	service.request.int_type = "cube";
 	ROS_INFO("Request init");
