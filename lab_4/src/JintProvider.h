@@ -20,7 +20,7 @@ private:
 	enum Interpolation {LIN, CUBE} iType;
 	
 	double interpolate(const vector<double>& params, double t);
-	void calc_cube_params(double x1, double x0, double dt, double t0, vector<double>& vect);
+	void calc_cube_params(double x1, double x0, double dt, vector<double>& vect);
 	void _publish(const vector<double>& position);
 };
 
