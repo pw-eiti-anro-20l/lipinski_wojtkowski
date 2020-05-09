@@ -7,7 +7,5 @@
 	<arg name="rvizconfig" default="$(find lab_4)/rviz/urdf.rviz" />
 	<rosparam command="load" file="$(find lab_4)/config/config.yaml" />
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-	<node name="jint" pkg="lab_4" type="jint" output="screen" />
-	<node name="jcmd" pkg="lab_4" type="jcmd" output="screen" />
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>

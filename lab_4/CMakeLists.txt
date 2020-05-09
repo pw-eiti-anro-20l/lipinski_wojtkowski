@@ -61,6 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    jint_control_srv.srv
+   oint_srv.srv
  )
 
 ## Generate actions in the 'action' folder
