@@ -1,0 +1,8 @@
+#request
+float64[] joint_states
+duration mov_duration
+string int_type
+---
+#response
+bool status
+string msg

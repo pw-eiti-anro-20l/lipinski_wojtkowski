@@ -101,25 +101,13 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base:
-          Value: true
-        link1:
-          Value: true
-        link2:
-          Value: true
-        manip:
-          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        base:
-          link1:
-            link2:
-              manip:
-                {}
+        {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -208,8 +196,8 @@ Visualization Manager:
       Name: Pose
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
-      Shape: Arrow
-      Topic: /PoseStamped1
+      Shape: Axes
+      Topic: /oint
       Unreliable: false
       Value: true
   Enabled: true

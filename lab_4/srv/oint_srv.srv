@@ -1,0 +1,6 @@
+#request
+float64[] desired_position
+int32 mov_duration
+---
+#response
+bool status

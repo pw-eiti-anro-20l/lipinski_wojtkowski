@@ -2,12 +2,9 @@
 a1: 1
 a2: 1
 d3: 0.5
-alpha2: 1.57
+alpha2: 3.1415
 theta1: 0
 theta2: 0
-joint1_lim: 0.5
-joint2_lim: 0.5
-joint3_lim: 0.5
 joint1: {
  rpy: "0 -0 0",
  pos: "0 -0 0",
@@ -17,7 +14,7 @@ joint2: {
  pos: "1 -0 0",
 }
 joint3: {
- rpy: "1.57 -0 0",
- pos: "1 -0.5 0.000398163",
+ rpy: "3.1415 -0 -0",
+ pos: "1 -4.63268e-05 -0.5",
 }
 ...
