@@ -15,6 +15,8 @@ find_package(catkin REQUIRED COMPONENTS
   urdf
   message_generation
   std_msgs
+  geometry_msgs
+  nav_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -139,6 +141,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(jint src/jint.cpp src/JintProvider.cpp)
  add_executable(jcmd src/jcmd.cpp)
+ add_executable(path_node src/path_node.cpp src/path_maker.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,6 +158,9 @@ include_directories(
    ${catkin_LIBRARIES}
  )
  target_link_libraries(jcmd
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(path_node
    ${catkin_LIBRARIES}
  )
 

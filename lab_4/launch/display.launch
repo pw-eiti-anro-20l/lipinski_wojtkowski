@@ -9,5 +9,7 @@
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 	<node name="jint" pkg="lab_4" type="jint" output="screen" />
 	<node name="jcmd" pkg="lab_4" type="jcmd" output="screen" />
+	<node name="dkin" pkg="lab_3" type="kdl_dkin" output="screen" />
+	<node name="path" pkg="lab_4" type="path_node" output="screen" args="/joint3" />
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>
