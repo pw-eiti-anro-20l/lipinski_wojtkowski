@@ -1,4 +1,5 @@
 <launch>
 	<node name="oint" pkg="lab_4" type="oint.py" output="screen" />
 	<node name="oint_control" pkg="lab_4" type="oint_control.py" output="screen" />
+	<node name="path_maker" pkg="lab_4" type="path_node" args="/oint" output="screen" />
 </launch>
