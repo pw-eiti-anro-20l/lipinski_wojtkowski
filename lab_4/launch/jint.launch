@@ -1,0 +1,4 @@
+<launch>	
+	<node name="jint" pkg="lab_4" type="jint" output="screen" />
+	<node name="jcmd" pkg="lab_4" type="jcmd" output="screen" />
+</launch>

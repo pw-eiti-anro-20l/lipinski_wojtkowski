@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+<launch>
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find lab_3)/urdf/rotating.urdf.xacro'" />
+	<param name="use_gui" value="true" />
+	<arg name="rvizconfig" default="$(find lab_3)/rviz/urdf.rviz" />
+	<node name="kdl_dkin" pkg ="lab_3" type="kdl_dkin" output="screen">
+		<rosparam command="load" file="$(find lab_3)/config/config.yaml" />
+	</node>
+	<node name="nonkdl" pkg ="lab_3" type="nonkdl.py" output="screen">
+		<rosparam command="load" file="$(find lab_3)/config/config.yaml" />
+	</node>
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>
+=======
 <launch>
 	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find lab_3)/urdf/rotating.urdf.xacro'" />
 	<param name="use_gui" value="true" />
@@ -12,3 +28,4 @@
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>
+>>>>>>> MTL
