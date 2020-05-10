@@ -35,7 +35,7 @@ if __name__=="__main__":
 	else:
 		print usage()
 		sys.exit(1)
-	print "Requesting move to x=%s, y=%s, z=%s, r/p/y=%s/%s/%s, move duration = %s"%(x,y,z,r,p,ya,t)
+	print "Requesting move to x=%s, y=%s, z=%s, r/p/y=%s/%s/%s, move duration = %s seconds"%(x,y,z,r,p,ya,t/10)
 	if oint_client(x,y,z,r,p,ya,t):
 		print "move finished"
 	
