@@ -2,6 +2,7 @@
 
 import sys
 import rospy
+sys.path.append('/home/marcin/catkin_ws/src/lab_4')
 from lab_4.srv import oint_srv
 def usage():
 	return "%s [x y z r p y duration_in_10ths_seconds_(optional)]"%sys.argv[0]

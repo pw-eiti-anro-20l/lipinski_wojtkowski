@@ -11,22 +11,23 @@ from geometry_msgs.msg import PoseStamped
 rospy.init_node('oint_server')
 pub = rospy.Publisher('oint', PoseStamped, queue_size = 10)
 position=[0, 0, 0, 0, 0 ,0]
-r=rospy.Rate(10)
 def oint_server():
 	s= rospy.Service('oint_srv',oint_srv, oint_handle)
 	rospy.spin()
 def oint_handle(srv):
+	r=rospy.Rate(20)
 	global position
 	desired_position = srv.desired_position
 	t=srv.mov_duration
 	ti=0
 	current_position = position[:]
-	while ti<t:
+	while ti<=t:
 		for i in range(6):
 			current_position[i] = position[i]+(desired_position[i]-position[i])/t*ti
 		qua = quaternion_from_euler(current_position[4],current_position[3],current_position[5])
 		p = PoseStamped()
 		p.header.frame_id = 'base'
+		print current_position
 		p.pose.position.x = current_position[0]
 		p.pose.position.y = current_position[1]
 		p.pose.position.z = current_position[2]
@@ -35,9 +36,10 @@ def oint_handle(srv):
 		p.pose.orientation.z = qua[2]
 		p.pose.orientation.w = qua[3]
 		pub.publish(p)
-		ti+=1
+		ti+=0.5
 		r.sleep()
-		position = current_position[:]
+	position = current_position[:]
+	return True
 if __name__ == "__main__":
 	oint_server()
 	

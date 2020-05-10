@@ -12,8 +12,6 @@ Panels:
         - /Pose2
         - /Pose3
         - /Pose4
-        - /Pose5
-        - /Pose6
       Splitter Ratio: 0.5
     Tree Height: 579
   - Class: rviz/Selection
@@ -101,13 +99,25 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base:
+          Value: true
+        link1:
+          Value: true
+        link2:
+          Value: true
+        manip:
+          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        base:
+          link1:
+            link2:
+              manip:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -166,36 +176,6 @@ Visualization Manager:
       Name: Pose
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
-      Shape: Arrow
-      Topic: /PoseStamped3
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Axes Length: 1
-      Axes Radius: 0.10000000149011612
-      Class: rviz/Pose
-      Color: 255; 25; 0
-      Enabled: true
-      Head Length: 0.30000001192092896
-      Head Radius: 0.10000000149011612
-      Name: Pose
-      Shaft Length: 1
-      Shaft Radius: 0.05000000074505806
-      Shape: Arrow
-      Topic: /PoseStamped2
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Axes Length: 1
-      Axes Radius: 0.10000000149011612
-      Class: rviz/Pose
-      Color: 255; 25; 0
-      Enabled: true
-      Head Length: 0.30000001192092896
-      Head Radius: 0.10000000149011612
-      Name: Pose
-      Shaft Length: 1
-      Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /oint
       Unreliable: false
@@ -228,7 +208,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 9.188283920288086
+      Distance: 8.301170349121094
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -243,10 +223,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3153974413871765
+      Pitch: 0.4653969705104828
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.6867756843566895
+      Yaw: 3.1217784881591797
     Saved: ~
 Window Geometry:
   Displays:
