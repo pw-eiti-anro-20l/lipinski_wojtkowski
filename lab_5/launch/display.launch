@@ -1,0 +1,11 @@
+<launch>
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find lab_5)/urdf/rotating.urdf.xacro'" />
+	<param name="use_gui" value="true" />
+	<param name="joint1_lim" value="0.5" />
+	<param name="joint2_lim" value="0.5" />
+	<param name="joint3_lim" value="0.5" />
+	<arg name="rvizconfig" default="$(find lab_5)/rviz/urdf.rviz" />
+	<rosparam command="load" file="$(find lab_5)/config/config.yaml" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+</launch>
