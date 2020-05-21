@@ -10,7 +10,7 @@ from geometry_msgs.msg import PoseStamped
 
 rospy.init_node('oint_server')
 pub = rospy.Publisher('oint', PoseStamped, queue_size = 10)
-position=[0, 0, 0, 0, 0 ,0]
+position=[2, 0, -0.25, 0, 0 ,0]
 def oint_server():
     s= rospy.Service('oint_srv',oint_srv, oint_handle)
     rospy.spin()
@@ -28,7 +28,7 @@ def oint_handle(srv):
         p = PoseStamped()
         p.header.frame_id = 'base'
         p.header.stamp = rospy.get_rostime()
-        print current_position
+        #print current_position
         p.pose.position.x = current_position[0]
         p.pose.position.y = current_position[1]
         p.pose.position.z = current_position[2]

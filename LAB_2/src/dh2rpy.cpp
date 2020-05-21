@@ -29,7 +29,7 @@ int main( int argc, char** argv) {
 			throw invalid_argument("No directory");
 	}
 	if(!check_arg_map(arg_map)) {
-		cerr << "Incorrect or missing arguments!\n";
+		cerr << "Incorrect or missing arguments! \n";
 		return -1;
 	}
 	double dh_params[3][4] = {{0, 0, 0, arg_map["theta1"]},

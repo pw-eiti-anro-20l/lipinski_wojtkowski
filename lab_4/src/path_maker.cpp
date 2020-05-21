@@ -2,9 +2,9 @@
 
 using namespace std;
 
-PathMaker::PathMaker(const string& topic) {
-	_sub = _nh.subscribe(topic, 1000, &PathMaker::callback, this);
-	_pub = _nh.advertise<nav_msgs::Path>("/path", 1000);
+PathMaker::PathMaker(const string& src_topic_name, const string& dst_topic_name) {
+	_sub = _nh.subscribe(src_topic_name, 1000, &PathMaker::callback, this);
+	_pub = _nh.advertise<nav_msgs::Path>(dst_topic_name, 1000);
 }
 
 void PathMaker::callback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
