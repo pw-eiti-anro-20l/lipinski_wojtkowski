@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Pose2
       Splitter Ratio: 0.5
     Tree Height: 585
   - Class: rviz/Views
@@ -35,21 +34,45 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Alpha: 1
+    - Alpha: 0.4000000059604645
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: false
+      Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        manip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        manip_end:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: false
+      Value: true
       Visual Enabled: true
     - Alpha: 1
       Axes Length: 1
@@ -94,7 +117,7 @@ Visualization Manager:
       Axes Radius: 0.05000000074505806
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
@@ -102,6 +125,29 @@ Visualization Manager:
       Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /oint
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /manip_path
       Unreliable: false
       Value: true
   Enabled: true
@@ -128,25 +174,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.671936511993408
+      Distance: 2.010329008102417
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.5422724485397339
-        Y: 1.0470548868179321
-        Z: 1.0327708721160889
+        X: 1.9106999635696411
+        Y: 6.107985973358154e-5
+        Z: 0.1994023323059082
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7046431303024292
+      Pitch: 0.09479734301567078
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.40961986780166626
+      Yaw: 5.861815929412842
     Saved: ~
 Window Geometry:
   Displays:
