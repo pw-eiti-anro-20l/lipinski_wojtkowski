@@ -1,0 +1,10 @@
+<launch>
+	<param name="joint1_lim" value="0.5" />
+	<param name="joint2_lim" value="0.5" />
+	<param name="joint3_lim" value="0.5" />
+	<node name="ikin" pkg="lab_5" type="ikin" output="screen" />
+	<node name="oint" pkg="lab_4" type="oint.py" output="screen" />
+	<node name="pos_cmd" pkg="lab_5" type="pos_cmd" output="screen" />
+	<node name="oint_path_maker" pkg="lab_4" type="path_node" args="/oint /path" output="screen" />
+	<node name="manip_path_maker" pkg="lab_4" type="path_node" args="/manip_pos /manip_path" output="screen" />
+</launch>

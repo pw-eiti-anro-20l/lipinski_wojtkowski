@@ -10,7 +10,7 @@
 
 class PathMaker {
 public:
-	PathMaker(const std::string& topic_name);
+	PathMaker(const std::string& src_topic_name, const std::string& dst_topic_name);
 	void callback(const geometry_msgs::PoseStamped:: ConstPtr& msg);
 	
 private:
